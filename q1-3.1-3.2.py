@@ -11,7 +11,7 @@ EC2_TYPE = "t3.micro"
 EC2_DISK_SIZE = 80
 IAM_ROLE = "LabRoleEC2"
 IAM_ROLE_ARN = "arn:aws:iam::665487683942:role/LabRoleEC2"
-FLOW_LOGS_BUCKET = "polytp4s3"
+FLOW_LOGS_BUCKET = "polystudent3-lab4-bucket"
 
 # Initialize AWS clients
 ec2_client = boto3.client('ec2', region_name=AWS_REGION)
