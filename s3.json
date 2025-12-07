@@ -1,0 +1,41 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description" : "S3 bucket",
+    "Resources" : {
+        "S3Bucket" : {
+            "DeletionPolicy" : "Retain",
+            "Type" : "AWS::S3::Bucket",
+            "Properties" : {
+                "BucketName" : "polytp4s3",
+                "AccessControl" : "Private",
+                "PublicAccessBlockConfiguration" : {
+                    "BlockPublicAcls" : true,
+                    "BlockPublicPolicy" : true,
+                    "IgnorePublicAcls" : true,
+                    "RestrictPublicBuckets" : true
+                },
+                "BucketEncryption" : {
+                    "ServerSideEncryptionConfiguration" : [
+                        {
+                            "ServerSideEncryptionByDefault" : {
+                                "SSEAlgorithm" : "aws:kms",
+                                "KMSMasterKeyID" : "arn:aws:kms:us-east-1:665487683942:key/1b3c0a33-882a-47e1-9941-9c8c46382a23"
+                            }
+                        }
+                    ]
+                },
+                "VersioningConfiguration" : {
+                    "Status" : "Enabled"
+                }
+            }
+        }
+    },
+    "Outputs" : {
+        "S3Bucket" : {
+            "Description" : "Bucket Created! :)",
+            "Value" : {
+                "Ref": "S3Bucket"
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Deploy a secure EC2 instance on the public subnet of AZ1",
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "KeyName": "polystudent-ec2",
+                "InstanceType": "t3.micro",
+                "ImageId": "ami-0ecb62995f68bb549",
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::GetAZs": ""
+                        }
+                    ]
+                },
+                "SecurityGroupIds": [
+                    "sg-0b89c1cd2de432bad"
+                ],
+                "SubnetId": "subnet-0280266aaabf3955f",
+                "IamInstanceProfile": "LabRoleEC2",
+                "BlockDeviceMappings": [
+                    {
+                        "DeviceName": "/dev/sda1",
+                        "Ebs": {
+                            "DeleteOnTermination": "false",
+                            "VolumeSize": "80"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
